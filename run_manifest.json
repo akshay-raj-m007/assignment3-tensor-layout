@@ -6,5 +6,5 @@
   "experiments": 10,
   "mnist_url": "https://storage.googleapis.com/cvdf-datasets/mnist/t10k-images-idx3-ubyte.gz",
   "mnist_sha256": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
-  "results_sha256": "cd5acec2ab9255e98642f3036381b3497a10c77e8e4f915b805053070f99e9ce"
+  "results_sha256": "6d20234babae59337033c2b75f0d99b5e20c15391c590660cfaad1c3c5f8b634"
 }

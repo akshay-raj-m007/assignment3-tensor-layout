@@ -90,7 +90,7 @@ def main():
     rows = [run_case(label, tensor, seed, args.output_dir, i)
             for i, (label, tensor, seed) in enumerate(cases)]
     with (args.output_dir / "results.csv").open("w", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fieldnames=FIELDS)
+        writer = csv.DictWriter(stream, fieldnames=FIELDS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     lines = ["Input | B | C | H | W | Max abs error | MAE | Check"]
