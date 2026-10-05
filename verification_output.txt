@@ -1,0 +1,4 @@
+PASS: PDF, CSV, console, manifest, MNIST checksum and all 10 difference tensors agree.
+PASS: repeated CSV is byte-identical
+PASS: user .npy loading path exercised (1 experiment, 12 elements, zero errors)
+PASS: all three PDF pages rendered and visually inspected

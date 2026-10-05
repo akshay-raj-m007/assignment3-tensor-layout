@@ -1,0 +1,11 @@
+input,B,C,H,W,max_abs_error,mae,dtype,seed,elements,nonzero_errors,verified
+Manual ordering,1,2,2,3,0.0,0.0,int32,n/a,12,0,PASS
+MNIST test samples 0-1,2,1,28,28,0.0,0.0,uint8,n/a,1568,0,PASS
+Synthetic RGB,2,3,32,32,0.0,0.0,float32,20261008,6144,0,PASS
+Synthetic fmap C=8,2,8,13,17,0.0,0.0,float32,20261013,3536,0,PASS
+Synthetic fmap C=16,2,16,13,17,0.0,0.0,float32,20261021,7072,0,PASS
+Synthetic fmap C=32,2,32,13,17,0.0,0.0,float32,20261037,14144,0,PASS
+Synthetic fmap C=64,2,64,13,17,0.0,0.0,float32,20261069,28288,0,PASS
+Synthetic fmap C=128,2,128,13,17,0.0,0.0,float32,20261133,56576,0,PASS
+Synthetic fmap C=256,2,256,13,17,0.0,0.0,float32,20261261,113152,0,PASS
+Synthetic fmap C=500,2,500,13,17,0.0,0.0,float32,20261505,221000,0,PASS

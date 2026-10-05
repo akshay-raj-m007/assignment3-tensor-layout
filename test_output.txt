@@ -1,0 +1,21 @@
+test_algorithm_call_allowlist_and_explicit_loops (test_tensor_layout.LayoutTests.test_algorithm_call_allowlist_and_explicit_loops) ... ok
+test_batch_and_nonsquare_handwritten (test_tensor_layout.LayoutTests.test_batch_and_nonsquare_handwritten) ... ok
+test_channel_counts_and_dtypes (test_tensor_layout.LayoutTests.test_channel_counts_and_dtypes) ... ok
+test_checker_rejects_corrupted_reconstruction (test_tensor_layout.LayoutTests.test_checker_rejects_corrupted_reconstruction) ... ok
+test_checker_rejects_permuted_matrix (test_tensor_layout.LayoutTests.test_checker_rejects_permuted_matrix) ... ok
+test_exhaustive_index_bijection (test_tensor_layout.LayoutTests.test_exhaustive_index_bijection) ... ok
+test_handwritten_order (test_tensor_layout.LayoutTests.test_handwritten_order) ... ok
+test_inputs_are_not_mutated_or_aliased (test_tensor_layout.LayoutTests.test_inputs_are_not_mutated_or_aliased) ... ok
+test_invalid_indices (test_tensor_layout.LayoutTests.test_invalid_indices) ... ok
+test_invalid_rank_type_values (test_tensor_layout.LayoutTests.test_invalid_rank_type_values) ... ok
+test_invalid_reconstruction_dimensions (test_tensor_layout.LayoutTests.test_invalid_reconstruction_dimensions) ... ok
+test_metric_does_not_round_int64_before_subtraction (test_tensor_layout.LayoutTests.test_metric_does_not_round_int64_before_subtraction) ... ok
+test_metrics_detect_known_nonzero_errors_and_sign (test_tensor_layout.LayoutTests.test_metrics_detect_known_nonzero_errors_and_sign) ... ok
+test_mismatched_metric_shapes (test_tensor_layout.LayoutTests.test_mismatched_metric_shapes) ... ok
+test_noncontiguous_input (test_tensor_layout.LayoutTests.test_noncontiguous_input) ... ok
+test_singleton_dimensions (test_tensor_layout.LayoutTests.test_singleton_dimensions) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 4.502s
+
+OK

@@ -1,0 +1,5 @@
+* text=auto eol=lf
+results.csv -text
+*.pdf -text
+*.npy -text
+*.gz -text

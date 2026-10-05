@@ -1,0 +1,12 @@
+Input | B | C | H | W | Max abs error | MAE | Check
+Manual ordering | 1 | 2 | 2 | 3 | 0.0 | 0.0 | PASS
+MNIST test samples 0-1 | 2 | 1 | 28 | 28 | 0.0 | 0.0 | PASS
+Synthetic RGB | 2 | 3 | 32 | 32 | 0.0 | 0.0 | PASS
+Synthetic fmap C=8 | 2 | 8 | 13 | 17 | 0.0 | 0.0 | PASS
+Synthetic fmap C=16 | 2 | 16 | 13 | 17 | 0.0 | 0.0 | PASS
+Synthetic fmap C=32 | 2 | 32 | 13 | 17 | 0.0 | 0.0 | PASS
+Synthetic fmap C=64 | 2 | 64 | 13 | 17 | 0.0 | 0.0 | PASS
+Synthetic fmap C=128 | 2 | 128 | 13 | 17 | 0.0 | 0.0 | PASS
+Synthetic fmap C=256 | 2 | 256 | 13 | 17 | 0.0 | 0.0 | PASS
+Synthetic fmap C=500 | 2 | 500 | 13 | 17 | 0.0 | 0.0 | PASS
+PASS: 10 experiments; 451492 elements checked; all errors zero.
