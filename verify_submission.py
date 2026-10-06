@@ -1,13 +1,15 @@
-"""Check that the report, console, CSV, manifest and saved errors agree."""
+"""Check that LaTeX, PDF, console, CSV, manifest and saved errors agree."""
 import csv
 import hashlib
 import json
 from pathlib import Path
+import unicodedata
 
 import numpy as np
 import pymupdf
 
 from experiments import MNIST_SHA256, FIELDS
+from build_report import tex_escape
 
 ROOT = Path(__file__).resolve().parent
 
@@ -26,12 +28,14 @@ def main():
     require(digest == manifest["results_sha256"], "Manifest/CSV mismatch")
     require(hashlib.sha256((ROOT / "data/t10k-images-idx3-ubyte.gz").read_bytes()).hexdigest() == MNIST_SHA256, "MNIST checksum mismatch")
     console = (ROOT / "console_output.txt").read_text(encoding="utf-8")
+    latex = (ROOT / "report.tex").read_text(encoding="utf-8")
+    require(digest in latex, "LaTeX CSV checksum mismatch")
     doc = pymupdf.open(ROOT / "report.pdf")
     require(len(doc) == 3, "Report page count")
-    result_page = " ".join(doc[1].get_text().split())
-    all_text = " ".join(" ".join(page.get_text() for page in doc).split())
+    result_page = " ".join(unicodedata.normalize("NFKC", doc[1].get_text()).split())
+    all_text = " ".join(unicodedata.normalize("NFKC", " ".join(page.get_text() for page in doc)).split())
     require(digest in all_text, "Report CSV checksum mismatch")
-    require("[0,1,2,3,4,5,6,7,8,9,10,11]" in all_text, "Missing manual ordering")
+    require("[0,1,2,3,4,5,6,7,8,9,10,11]" in all_text.replace(" ", ""), "Missing manual ordering")
     for index, row in enumerate(rows):
         shape = tuple(int(row[k]) for k in ("B", "C", "H", "W"))
         errors = np.load(ROOT / "errors" / f"{index:02d}.npy", allow_pickle=False)
@@ -46,10 +50,12 @@ def main():
         require(expected_console in console, f"Console row mismatch: {index}")
         expected_pdf = " ".join(row[key] for key in FIELDS[:7])
         require(expected_pdf in result_page, f"PDF table row mismatch: {index}")
+        expected_latex = " & ".join(tex_escape(row[key]) for key in FIELDS[:7]) + r" \\"
+        require(expected_latex in latex, f"LaTeX table row mismatch: {index}")
     total = sum(int(row["elements"]) for row in rows)
     require(f"PASS: 10 experiments; {total} elements checked; all errors zero." in console, "Console summary mismatch")
     require(f"{total:,} elements verified" in all_text, "PDF summary mismatch")
-    print("PASS: PDF, CSV, console, manifest, MNIST checksum and all 10 difference tensors agree.")
+    print("PASS: LaTeX, PDF, CSV, console, manifest, MNIST checksum and all 10 difference tensors agree.")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-PASS: PDF, CSV, console, manifest, MNIST checksum and all 10 difference tensors agree.
-PASS: repeated CSV is byte-identical
-PASS: user .npy loading path exercised (1 experiment, 12 elements, zero errors)
-PASS: all three PDF pages rendered and visually inspected
+PASS: LaTeX, PDF, CSV, console, manifest, MNIST checksum and all 10 difference tensors agree.
+PASS: all PDF fonts are embedded
+PASS: no LaTeX layout overflow warnings
+PASS: LaTeX refresh is idempotent and preserves report prose

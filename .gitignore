@@ -4,3 +4,8 @@ __pycache__/
 reproduced/
 custom_run/
 preview/
+.tools/
+*.aux
+*.log
+*.out
+*.synctex.gz

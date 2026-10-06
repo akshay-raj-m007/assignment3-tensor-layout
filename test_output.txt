@@ -16,6 +16,6 @@ test_noncontiguous_input (test_tensor_layout.LayoutTests.test_noncontiguous_inpu
 test_singleton_dimensions (test_tensor_layout.LayoutTests.test_singleton_dimensions) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 4.502s
+Ran 16 tests in 5.171s
 
 OK

@@ -12,15 +12,28 @@ This submission implements IIT Tirupati, AI Accelerator Design, Assignment 3, us
 | `results.csv` | Actual measured results and run dimensions |
 | `errors/00.npy` through `errors/09.npy` | Full signed element-wise difference tensors, in CSV row order |
 | `console_output.txt`, `run_manifest.json` | Captured experiment output, versions, seeds and CSV checksum |
-| `report.pdf`, `build_report.py` | Three-page report and its reproducible generator |
-| `verify_submission.py` | Cross-check PDF/CSV/console/manifest/difference tensors/data checksum |
+| `report.tex`, `report.pdf`, `build_report.py` | Editable standalone LaTeX, corresponding three-page PDF, and CSV-refresh/compiler driver |
+| `latex_build_output.txt` | Actual output of the LaTeX compiler |
+| `verify_submission.py` | Cross-check LaTeX/PDF/CSV/console/manifest/difference tensors/data checksum |
 | `data/t10k-images-idx3-ubyte.gz` | Original MNIST test image archive, unchanged |
-| `requirements.txt` | Pinned minimal dependencies: NumPy and PyMuPDF (report generation/verification) |
+| `requirements.txt` | Pinned Python dependencies: NumPy and PyMuPDF (PDF inspection/verification only) |
 | `test_output.txt`, `verification_output.txt` | Output from final validation commands |
 
 ## Exact setup and run commands
 
-Use Python 3.12 or newer; this submission was executed with Python 3.14.2. Open a terminal **in this repository**. The bundled dataset makes experiment execution offline; dependency installation may require internet access. No GPU, PyTorch, notebook, or external executable is needed.
+Use Python 3.12 or newer; this submission was executed with Python 3.14.2. Open a terminal **in this repository**. The bundled dataset makes experiment execution offline; dependency installation may require internet access. No GPU, PyTorch or notebook is needed. Rebuilding the PDF requires a LaTeX compiler. This report was compiled from `report.tex` with **Tectonic 0.17.0**; PyMuPDF only reads/verifies the resulting PDF.
+
+On Windows, install the portable compiler locally (no system installation or PATH modification needed):
+
+```powershell
+New-Item -ItemType Directory -Force .tools
+Invoke-WebRequest "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-pc-windows-msvc.zip" -OutFile .tools/tectonic.zip
+Expand-Archive .tools/tectonic.zip -DestinationPath .tools -Force
+```
+
+The downloaded archive SHA-256 is `f61ce51f0b0ade1015b7de7ef368541c5424e9756ecbd0d7af97d6d48030845f`. The compiler executable/cache is not committed. The first compilation downloads standard LaTeX packages and fonts. Alternatively, install TeX Live/MiKTeX and put `pdflatex` or `xelatex` on PATH. On Linux/macOS, follow the [official Tectonic installation instructions](https://tectonic-typesetting.github.io/book/latest/installation/) or use an existing TeX distribution. The build script finds these compilers automatically; `--compiler path/to/compiler` overrides the choice.
+
+On the tested Windows host, Tectonic printed a nonfatal Fontconfig configuration message but completed successfully using its TeX fonts. All 17 fonts in the PDF are embedded; the final LaTeX build has no layout-overflow warnings. All three pages were visually inspected.
 
 Windows PowerShell (activation is unnecessary):
 
@@ -53,7 +66,7 @@ PASS: 10 experiments; 451492 elements checked; all errors zero.
 Expected artifact-check output:
 
 ```text
-PASS: PDF, CSV, console, manifest, MNIST checksum and all 10 difference tensors agree.
+PASS: LaTeX, PDF, CSV, console, manifest, MNIST checksum and all 10 difference tensors agree.
 ```
 
 For an independent repeat without overwriting submitted measurements:
@@ -69,6 +82,19 @@ To add your identity to the report (replace the example text):
 .\.venv\Scripts\python.exe build_report.py --student "Your Name" --roll "Your Roll Number"
 .\.venv\Scripts\python.exe verify_submission.py
 ```
+
+You may also edit `\StudentName` and `\RollNumber` directly near the top of `report.tex`. The script preserves existing identity values unless those flags are supplied. It preserves prose edits and only replaces the two clearly marked generated blocks containing results and metadata.
+
+To edit/compile the LaTeX directly, upload **only `report.tex`** to Overleaf and select pdfLaTeX, or run one of these local compiler options:
+
+```powershell
+.\.tools\tectonic.exe --keep-logs --untrusted report.tex
+# Alternatively, with a TeX distribution on PATH:
+pdflatex -interaction=nonstopmode -halt-on-error -no-shell-escape report.tex
+pdflatex -interaction=nonstopmode -halt-on-error -no-shell-escape report.tex
+```
+
+The LaTeX file contains the full report, equations, pseudocode and measured table; it has no external image, bibliography or included-file dependencies. To update its measured values without a local compiler, run `python build_report.py --tex-only` before uploading to Overleaf. That option updates the source only; compile afterward to update the corresponding PDF. Compilation logs are kept in `latex_build_output.txt` when using the Python build driver. Auxiliary compiler files are ignored by Git.
 
 To load an existing finite real BCHW/NCHW NumPy tensor:
 
@@ -139,6 +165,7 @@ All instructional statements on the three PDF pages are accounted for below. Pag
 | p2: small manual example and several mappings | Report p1 and manual table above; handwritten expected-output tests |
 | p2: Python source in GitHub and PDF GitHub link | Repository submission links at end of this document |
 | p2: short PDF with both pseudocodes, manual example, dimensions, errors, discussion | `report.pdf`: p1 algorithms/manual example; p2 dimensions/errors; p3 discussion |
+| User follow-up: editable LaTeX and its corresponding PDF | Standalone `report.tex`; `build_report.py` invokes a real LaTeX compiler; `latex_build_output.txt`; LaTeX/PDF table consistency checks |
 | p2: realistic image data and wider-channel synthetic feature maps | Real MNIST archive and correctly labeled synthetic cases; provenance above |
 | p2: enough small and large channel sizes | C=1,3,8,16,32,64,128,256,500; report p2 |
 | p2: specify every B/C/H/W and use practical sizes | Every CSV row and report p2; maximum 221,000 elements per experiment |
@@ -159,6 +186,7 @@ The algorithms accept positive dimensions and finite real numeric NumPy arrays, 
 - [Complete public repository](https://github.com/akshay-raj-m007/assignment3-tensor-layout)
 - [Python conversion source](https://github.com/akshay-raj-m007/assignment3-tensor-layout/blob/main/tensor_layout.py)
 - [Runnable experiment program](https://github.com/akshay-raj-m007/assignment3-tensor-layout/blob/main/experiments.py)
+- [Editable LaTeX report](https://github.com/akshay-raj-m007/assignment3-tensor-layout/blob/main/report.tex)
 - [PDF report](https://github.com/akshay-raj-m007/assignment3-tensor-layout/blob/main/report.pdf)
 
 Submit the source/repository and PDF links to the course portal. The repository includes all required local files and the dataset archive; no additional upload is needed to reproduce the suite.
